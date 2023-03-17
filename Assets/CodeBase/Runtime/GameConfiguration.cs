@@ -1,4 +1,3 @@
-using System;
 using CodeBase.Runtime.Infrastructure.InternalTools;
 using UnityEngine;
 
@@ -15,12 +14,6 @@ namespace CodeBase.Runtime
         }
         
         public int LevelAmount => _levelAmount;
-
-        [Serializable] public class LevelSettings
-        {
-            [SerializeField] private int _levelId;
-            [SerializeField] private int _maxCustomersAmount;
-            [SerializeField] private TimeSpan _levelTime;
-        }
+        
     }
 }

@@ -1,4 +1,4 @@
-namespace CodeBase.Runtime.Infrastructure.States
+namespace CodeBase.Runtime.Infrastructure.FSM.States
 {
     public abstract class StateWithPayload<TPayload> : State
     {

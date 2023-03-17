@@ -1,9 +1,9 @@
 using System.Collections.Generic;
 using System.Linq;
-using CodeBase.Runtime.Infrastructure.States;
-using State = CodeBase.Runtime.Infrastructure.States.State;
+using CodeBase.Runtime.Infrastructure.FSM.States;
+using State = CodeBase.Runtime.Infrastructure.FSM.States.State;
 
-namespace CodeBase.Runtime.Infrastructure
+namespace CodeBase.Runtime.Infrastructure.FSM
 {
     public class FinalGameStateMachine
     {

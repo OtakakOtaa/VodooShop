@@ -1,14 +1,14 @@
 using System;
 using CodeBase.Runtime.Infrastructure;
-using CodeBase.Runtime.Infrastructure.States;
+using CodeBase.Runtime.Infrastructure.FSM;
+using CodeBase.Runtime.Infrastructure.FSM.States;
 using NUnit.Framework;
-using UnityEngine;
 
 namespace CodeBase.Test
 {
     public class FSMTest
     {
-        #region Prepare
+        #region SetUp
 
         private const string ExpectedMessage = "Success";
         private const string ExpectedPayload = "payload";
@@ -30,9 +30,9 @@ namespace CodeBase.Test
                 new State[] { _simpleState, _exitableState, _stateWithPayload }
             );
         }
-        
+
         #endregion
-        
+
         [TearDown]
         public void ClearFSM()
         {
@@ -50,22 +50,27 @@ namespace CodeBase.Test
         public void TransactionWithExitTest()
         {
             // Prepare
-            try { _finalGameStateMachine.Enter<ExitableState>(); }
-            catch (Exception _) { /* ignored*/ }
-            
+            try
+            {
+                _finalGameStateMachine.Enter<ExitableState>();
+            }
+            catch (Exception _)
+            {
+                /* ignored*/
+            }
+
             // Assert
             Assert.Catch(() => { _finalGameStateMachine.Enter<SimpleState>(); });
         }
 
-        [Test] public void TransactionWithPayloadTest()
+        [Test]
+        public void TransactionWithPayloadTest()
         {
-            Assert.Catch(() =>
-            { 
-                _finalGameStateMachine.Enter<string, StateWithPayload>(ExpectedPayload);
-            });
+            Assert.Catch(() => { _finalGameStateMachine.Enter<string, StateWithPayload>(ExpectedPayload); });
         }
-        
+
         #region Resources
+
         private class SimpleState : State
         {
             public override void Enter()

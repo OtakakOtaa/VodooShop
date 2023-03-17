@@ -1,5 +1,11 @@
 {
   "dependencies": {
+    "com._.csv-reader": {
+      "version": "file:com._.csv-reader",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
+    },
     "com.unity.collab-proxy": {
       "version": "1.17.7",
       "depth": 0,
@@ -154,6 +160,12 @@
         "com.unity.modules.jsonserialize": "1.0.0"
       },
       "url": "https://packages.unity.com"
+    },
+    "com.user.unitask": {
+      "version": "file:com.user.unitask",
+      "depth": 0,
+      "source": "embedded",
+      "dependencies": {}
     },
     "com.unity.modules.ai": {
       "version": "1.0.0",

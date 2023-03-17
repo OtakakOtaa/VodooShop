@@ -1,4 +1,4 @@
-namespace CodeBase.Runtime.Infrastructure.States
+namespace CodeBase.Runtime.Infrastructure.FSM.States
 {
     public interface IExitableState
     {

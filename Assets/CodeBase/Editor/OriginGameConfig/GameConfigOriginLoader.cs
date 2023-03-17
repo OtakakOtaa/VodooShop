@@ -1,18 +1,19 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using CodeBase.Editor.OriginGameConfig.TableParsers;
 using CodeBase.Runtime;
 using Cysharp.Threading.Tasks;
 using UnityEngine.Networking;
 
 namespace CodeBase.Editor.OriginGameConfig
 {
-    public sealed class GameConfigLoader
+    public sealed class GameConfigOriginLoader
     {
         private readonly ConfigTableParser _configTableParser;
         private readonly OriginSettings _originSettings;
 
-        public GameConfigLoader()
+        public GameConfigOriginLoader()
         {
             _originSettings = new OriginSettings();
             _configTableParser = new ConfigTableParser(_originSettings);
@@ -21,7 +22,9 @@ namespace CodeBase.Editor.OriginGameConfig
         public async UniTask<GameConfiguration> FetchConfig()
         {
             var rawTablesData = await LoadRawData();
-            _configTableParser.Build(rawTablesData);
+            
+            _configTableParser.Parse(rawTablesData);
+            return null;
         }
 
         private async Task<Dictionary<string, string>> LoadRawData()
@@ -36,7 +39,7 @@ namespace CodeBase.Editor.OriginGameConfig
         public class OriginSettings
         {
             private const string RootUrl =
-                "https://docs.google.com/spreadsheets/d/18tM5AINSJw7L4NV0i85Un1JLPVA612AVH4bTBlZK6iY/edit#gid=";
+                "https://docs.google.com/spreadsheets/d/18tM5AINSJw7L4NV0i85Un1JLPVA612AVH4bTBlZK6iY/export?format=csv&gid=";
 
             private const string DayTableId = "81119051";
             private const string CustomerTableId = "972599682";
@@ -52,11 +55,14 @@ namespace CodeBase.Editor.OriginGameConfig
                     [OrderKey] = RootUrl + OrderTableId,
                     [CustomerKey] = RootUrl + CustomerTableId,
                     [DialogueKey] = RootUrl + DialogueTableId,
+                    [PoolKey] = RootUrl + CustomerTableId,
                 };
 
             public string DayKey => nameof(DayKey);
             public string OrderKey => nameof(OrderKey);
             public string CustomerKey => nameof(CustomerKey);
+            public string PoolKey => nameof(CustomerKey);
+            
             public string DialogueKey => nameof(DialogueKey);
         }
     }
