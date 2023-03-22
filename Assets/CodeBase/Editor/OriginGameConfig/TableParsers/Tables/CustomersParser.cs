@@ -7,7 +7,7 @@ namespace CodeBase.Editor.OriginGameConfig.TableParsers.Tables
     {
         protected override void FillEntity(string field, CustomerInfo entity, string key)
         {
-            switch (field)
+            switch (key)
             {
                 case CustomersTableTemplate.Id:
                     entity.Id = field;
@@ -38,7 +38,7 @@ namespace CodeBase.Editor.OriginGameConfig.TableParsers.Tables
         public sealed class CustomerInfo
         {
             [CanBeNull] public string Id;
-            [CanBeNull] public  string Name;
+            [CanBeNull] public string Name;
         }
     }
 }

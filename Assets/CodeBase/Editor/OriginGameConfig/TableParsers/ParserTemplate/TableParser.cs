@@ -68,7 +68,7 @@ namespace CodeBase.Editor.OriginGameConfig.TableParsers.ParserTemplate
         protected Range ParseToRange(string field)
         {
             var rangeValues = field.Trim(Space).Split(RangeSeparator).Select(int.Parse).ToArray();
-            return new Range(rangeValues.First(), rangeValues.Last() + 1);
+            return new Range(rangeValues.First(), rangeValues.Last());
         }
     }
 }

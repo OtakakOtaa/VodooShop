@@ -24,6 +24,7 @@ namespace CodeBase.Editor.OriginGameConfig.TableParsers
             _customersParser.Parse(rawTables[_originSettings.CustomerKey]);
             _customerPoolsParser.Parse(rawTables[_originSettings.PoolKey]);
             _dialogueParser.Parse(rawTables[_originSettings.DialogueKey]);
+            
             return null;
         }
         

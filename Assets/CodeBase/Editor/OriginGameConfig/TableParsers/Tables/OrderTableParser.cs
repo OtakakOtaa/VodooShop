@@ -19,7 +19,7 @@ namespace CodeBase.Editor.OriginGameConfig.TableParsers.Tables
                     order.Reward = int.Parse(field); 
                     break;
                 case OrderTableTemplate.DialogueId:
-                    order.RequestedItem = field;
+                    order.DialogueId = field;
                     break;
                 case OrderTableTemplate.Chapter:
                     order.Chapter = int.Parse(field);

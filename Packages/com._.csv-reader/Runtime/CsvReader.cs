@@ -16,7 +16,7 @@ public class CsvReader
     public CsvReader(string data, string rowSeparator = DefaultRowSeparator, char fieldSeparator = DefaultFieldSeparator)
     {
         _fieldSeparator = fieldSeparator;
-        _rows = data.Split(rowSeparator).WithoutLast();
+        _rows = data.Split(rowSeparator).Where(s => s.Length != 0).ToArray();
     }
 
     public bool TryRead()

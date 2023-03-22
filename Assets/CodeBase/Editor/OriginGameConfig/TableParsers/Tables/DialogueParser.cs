@@ -9,12 +9,16 @@ namespace CodeBase.Editor.OriginGameConfig.TableParsers.Tables
     {
         protected override void FillEntity(string field, Dialogue entity, string key)
         {
-            switch (field)
+            switch (key)
             {
                 case DialogueTable.Id:
                     entity.Id = field;
                     break;
-                default:
+                case DialogueTable.Chapter1 or 
+                    DialogueTable.Chapter2 or 
+                    DialogueTable.Chapter3 or 
+                    DialogueTable.Chapter4 or 
+                    DialogueTable.Chapter5:
                     entity.Chapters.Add(field);
                     break;
             }
@@ -43,7 +47,7 @@ namespace CodeBase.Editor.OriginGameConfig.TableParsers.Tables
                                                     Keys.ContainsKey(Chapter5);
 
             public override bool ThisReadKey(string comparedField)
-                => comparedField is Id or Chapter1 or Chapter2 or Chapter3 or Chapter4;
+                => comparedField is Id or Chapter1 or Chapter2 or Chapter3 or Chapter4 or Chapter5;
         }
 
         public sealed class Dialogue

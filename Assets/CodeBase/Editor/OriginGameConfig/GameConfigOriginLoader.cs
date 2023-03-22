@@ -43,6 +43,7 @@ namespace CodeBase.Editor.OriginGameConfig
 
             private const string DayTableId = "81119051";
             private const string CustomerTableId = "972599682";
+            private const string CustomerPoolTableId = "909201559";
             private const string OrderTableId = "262418980";
             private const string DialogueTableId = "688924706";
 
@@ -55,13 +56,13 @@ namespace CodeBase.Editor.OriginGameConfig
                     [OrderKey] = RootUrl + OrderTableId,
                     [CustomerKey] = RootUrl + CustomerTableId,
                     [DialogueKey] = RootUrl + DialogueTableId,
-                    [PoolKey] = RootUrl + CustomerTableId,
+                    [PoolKey] = RootUrl + CustomerPoolTableId,
                 };
 
             public string DayKey => nameof(DayKey);
             public string OrderKey => nameof(OrderKey);
             public string CustomerKey => nameof(CustomerKey);
-            public string PoolKey => nameof(CustomerKey);
+            public string PoolKey => nameof(PoolKey);
             
             public string DialogueKey => nameof(DialogueKey);
         }

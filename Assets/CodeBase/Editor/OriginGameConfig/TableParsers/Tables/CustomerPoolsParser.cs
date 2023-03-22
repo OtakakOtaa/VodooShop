@@ -10,7 +10,7 @@ namespace CodeBase.Editor.OriginGameConfig.TableParsers.Tables
     {
         protected override void FillEntity(string field, Pool entity, string key)
         {
-            switch (field)
+            switch (key)
             {
                 case PoolsTableTemplate.Id:
                     entity.Id = field;
