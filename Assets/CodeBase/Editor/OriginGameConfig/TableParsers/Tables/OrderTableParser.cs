@@ -3,9 +3,9 @@ using JetBrains.Annotations;
 
 namespace CodeBase.Editor.OriginGameConfig.TableParsers.Tables
 {
-    public sealed class OrderTableParser : TableParser<OrderTableParser.OrderInfo, OrderTableParser.OrderTableTemplate>
+    public sealed class OrderTableParser : TableParser<OrderTableParser.Order, OrderTableParser.OrderTableTemplate>
     {
-        protected override void FillEntity(string field, OrderInfo order, string key)
+        protected override void FillEntity(string field, Order order, string key)
         {
             switch (key)
             {
@@ -27,7 +27,7 @@ namespace CodeBase.Editor.OriginGameConfig.TableParsers.Tables
             }
         }
 
-        protected override bool IsEntityFilled(OrderInfo entity) =>
+        protected override bool IsEntityFilled(Order entity) =>
             entity.Id is not null &&
             entity.RequestedItem is not null &&
             entity.Reward is not null;
@@ -51,7 +51,7 @@ namespace CodeBase.Editor.OriginGameConfig.TableParsers.Tables
                 => comparedField is Id or RequestedItem or Reward or DialogueId or Chapter;
         }
         
-        public sealed class OrderInfo
+        public sealed class Order
         {
             [CanBeNull] public string Id;
             [CanBeNull] public string RequestedItem;

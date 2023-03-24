@@ -3,9 +3,9 @@ using JetBrains.Annotations;
 
 namespace CodeBase.Editor.OriginGameConfig.TableParsers.Tables
 {
-    public class CustomersParser : TableParser<CustomersParser.CustomerInfo, CustomersParser.CustomersTableTemplate>
+    public class CustomersParser : TableParser<CustomersParser.Customer, CustomersParser.CustomersTableTemplate>
     {
-        protected override void FillEntity(string field, CustomerInfo entity, string key)
+        protected override void FillEntity(string field, Customer entity, string key)
         {
             switch (key)
             {
@@ -18,7 +18,7 @@ namespace CodeBase.Editor.OriginGameConfig.TableParsers.Tables
             }
         }
 
-        protected override bool IsEntityFilled(CustomerInfo entity)
+        protected override bool IsEntityFilled(Customer entity)
             => entity.Id is not null && entity.Name is not null; 
 
         public sealed class CustomersTableTemplate : TableTemplate
@@ -35,7 +35,7 @@ namespace CodeBase.Editor.OriginGameConfig.TableParsers.Tables
                 => comparedField is Id or Name;
         }
         
-        public sealed class CustomerInfo
+        public sealed class Customer
         {
             [CanBeNull] public string Id;
             [CanBeNull] public string Name;

@@ -5,31 +5,31 @@ using CodeBase.Editor.OriginGameConfig.TableParsers.ParserTemplate;
 
 namespace CodeBase.Editor.OriginGameConfig.TableParsers.Tables
 {
-    public sealed class DayTableParser : TableParser<DayTableParser.DayInfo, DayTableParser.DayTableTemplate>
+    public sealed class DayTableParser : TableParser<DayTableParser.Day, DayTableParser.DayTableTemplate>
     {
-        protected override void FillEntity(string field, DayInfo dayInfo, string key)
+        protected override void FillEntity(string field, Day day, string key)
         {
             switch (key)
             {
                 case DayTableTemplate.DayNumber:
-                    dayInfo.LevelId = int.Parse(field);
+                    day.LevelId = int.Parse(field);
                     break;
                 case DayTableTemplate.CustomersAmount:
-                    dayInfo.MaxCustomersAmount = int.Parse(field);
+                    day.MaxCustomersAmount = int.Parse(field);
                     break;
                 case DayTableTemplate.GameTime:
-                    dayInfo.LevelTime = ParseToTime(field);
+                    day.LevelTime = ParseToTime(field);
                     break;
                 case DayTableTemplate.StoryCustomersId:
-                    dayInfo.StoryCustomersId = ParseToIdArray(field).ToArray();
+                    day.StoryCustomersId = ParseToIdArray(field).ToArray();
                     break;
                 case DayTableTemplate.PoolsId:
-                    dayInfo.PoolsId = ParseToIdArray(field).ToArray();
+                    day.PoolsId = ParseToIdArray(field).ToArray();
                     break;
             }
         }
 
-        protected override bool IsEntityFilled(DayInfo entity)
+        protected override bool IsEntityFilled(Day entity)
             => entity.LevelId is not null &&
                entity.LevelTime is not null &&
                entity.MaxCustomersAmount is not null &&
@@ -57,7 +57,7 @@ namespace CodeBase.Editor.OriginGameConfig.TableParsers.Tables
                 comparedField is DayNumber or CustomersAmount or GameTime or StoryCustomersId or PoolsId;
         }
 
-        public sealed class DayInfo
+        public sealed class Day
         {
             public int? LevelId;
             public int? MaxCustomersAmount;

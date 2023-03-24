@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using CodeBase.Editor.OriginGameConfig.TableParsers.Tables;
 using CodeBase.Runtime;
 
@@ -7,6 +8,7 @@ namespace CodeBase.Editor.OriginGameConfig.TableParsers
     public sealed class ConfigTableParser
     {
         private readonly GameConfigOriginLoader.OriginSettings _originSettings;
+        private readonly GameConfigMapper _gameConfigMapper = new ();
 
         private readonly DayTableParser _dayTableParser = new ();
         private readonly OrderTableParser _orderTableParser = new ();
@@ -19,13 +21,15 @@ namespace CodeBase.Editor.OriginGameConfig.TableParsers
 
         public GameConfiguration Parse(Dictionary<string, string> rawTables)
         {
-            _dayTableParser.Parse(rawTables[_originSettings.DayKey]);
-            _orderTableParser.Parse(rawTables[_originSettings.OrderKey]);
-            _customersParser.Parse(rawTables[_originSettings.CustomerKey]);
-            _customerPoolsParser.Parse(rawTables[_originSettings.PoolKey]);
-            _dialogueParser.Parse(rawTables[_originSettings.DialogueKey]);
-            
-            return null;
+            GameConfigMapper.MapperDataContainer container = new()
+            {
+                Days = _dayTableParser.Parse(rawTables[_originSettings.DayKey]).ToArray(),
+                Orders = _orderTableParser.Parse(rawTables[_originSettings.OrderKey]).ToArray(),
+                Customers = _customersParser.Parse(rawTables[_originSettings.CustomerKey]).ToArray(),
+                Pools = _customerPoolsParser.Parse(rawTables[_originSettings.PoolKey]).ToArray(),
+                Dialogues = _dialogueParser.Parse(rawTables[_originSettings.DialogueKey]).ToArray()
+            };
+            return _gameConfigMapper.TranslateToConfigFormat(container);
         }
         
     }

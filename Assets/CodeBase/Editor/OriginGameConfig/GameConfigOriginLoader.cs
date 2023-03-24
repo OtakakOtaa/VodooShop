@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using CodeBase.Editor.OriginGameConfig.TableParsers;
 using CodeBase.Runtime;
 using Cysharp.Threading.Tasks;
+using UnityEditor;
 using UnityEngine.Networking;
 
 namespace CodeBase.Editor.OriginGameConfig
@@ -22,9 +23,7 @@ namespace CodeBase.Editor.OriginGameConfig
         public async UniTask<GameConfiguration> FetchConfig()
         {
             var rawTablesData = await LoadRawData();
-            
-            _configTableParser.Parse(rawTablesData);
-            return null;
+            return _configTableParser.Parse(rawTablesData);
         }
 
         private async Task<Dictionary<string, string>> LoadRawData()

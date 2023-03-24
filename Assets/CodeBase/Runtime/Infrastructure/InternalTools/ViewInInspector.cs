@@ -1,21 +1,30 @@
+using System.Linq;
+using System.Text.RegularExpressions;
 using UnityEditor;
 using UnityEngine;
 
 namespace CodeBase.Runtime.Infrastructure.InternalTools
 {
-    public class ViewInInspector : PropertyAttribute { }
-    
+    public class ViewInInspector : PropertyAttribute
+    {
+    }
+
     [CustomPropertyDrawer(typeof(ViewInInspector))]
-    public class ViewInInspectorDrawer : PropertyDrawer
+    public sealed class ViewInInspectorDrawer : PropertyDrawer
     {
         public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
         {
             property.serializedObject.Update();
-            if(property.propertyType is SerializedPropertyType.Integer)
-                EditorGUI.LabelField(position, label.text, property.intValue.ToString());
-            if(property.propertyType is SerializedPropertyType.String)
-                EditorGUI.LabelField(position, label.text, property.stringValue);
-            property.serializedObject.ApplyModifiedProperties();
+
+            switch (property.propertyType)
+            {
+                case SerializedPropertyType.Integer:
+                    EditorGUI.LabelField(position, label.text, property.intValue.ToString());
+                    return;
+                case SerializedPropertyType.String:
+                    EditorGUI.LabelField(position, label.text, property.stringValue);
+                    return;
+            }
         }
     }
 }
