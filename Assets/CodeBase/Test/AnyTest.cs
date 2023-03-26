@@ -1,5 +1,6 @@
 using System;
 using CodeBase.Runtime;
+using CodeBase.Runtime.Configuration;
 using NUnit.Framework;
 using UnityEditor;
 using UnityEngine;

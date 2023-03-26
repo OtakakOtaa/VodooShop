@@ -12,14 +12,17 @@ namespace CodeBase.Editor.OriginGameConfig.TableParsers.Tables
                 case OrderTableTemplate.Id:
                     order.Id = field;
                     break;
+                case OrderTableTemplate.DialogueId:
+                    order.DialogueId = field;
+                    break;
+                case OrderTableTemplate.CustomerId:
+                    order.CustomerId = field;
+                    break;
                 case OrderTableTemplate.RequestedItem:
                     order.RequestedItem = field; 
                     break;
                 case OrderTableTemplate.Reward:
                     order.Reward = int.Parse(field); 
-                    break;
-                case OrderTableTemplate.DialogueId:
-                    order.DialogueId = field;
                     break;
                 case OrderTableTemplate.Chapter:
                     order.Chapter = int.Parse(field);
@@ -35,6 +38,7 @@ namespace CodeBase.Editor.OriginGameConfig.TableParsers.Tables
         public sealed class OrderTableTemplate : TableTemplate
         {
             public const string Id = "id";
+            public const string CustomerId = "customer_id";
             public const string RequestedItem = "requested_item";
             public const string Reward = "reward";
             public const string DialogueId = "dialogue_id";
@@ -46,17 +50,19 @@ namespace CodeBase.Editor.OriginGameConfig.TableParsers.Tables
                                                     Keys.ContainsKey(RequestedItem) &&
                                                     Keys.ContainsKey(Reward) &&
                                                     Keys.ContainsKey(DialogueId) &&
+                                                    Keys.ContainsKey(CustomerId) &&
                                                     Keys.ContainsKey(Chapter);
             public override bool ThisReadKey(string comparedField) 
-                => comparedField is Id or RequestedItem or Reward or DialogueId or Chapter;
+                => comparedField is Id or RequestedItem or Reward or DialogueId or Chapter or CustomerId;
         }
         
         public sealed class Order
         {
             [CanBeNull] public string Id;
+            [CanBeNull] public string CustomerId;
+            [CanBeNull] public string DialogueId;
             [CanBeNull] public string RequestedItem;
             [CanBeNull] public int? Reward;
-            [CanBeNull] public string DialogueId;
             [CanBeNull] public int? Chapter;
         }
     }

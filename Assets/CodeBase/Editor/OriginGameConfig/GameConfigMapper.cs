@@ -1,7 +1,5 @@
-using System;
-using System.Linq;
 using CodeBase.Editor.OriginGameConfig.TableParsers.Tables;
-using CodeBase.Runtime;
+using CodeBase.Runtime.Configuration;
 using UnityEngine;
 
 namespace CodeBase.Editor.OriginGameConfig
@@ -12,20 +10,14 @@ namespace CodeBase.Editor.OriginGameConfig
         {
             var configuration = ScriptableObject.CreateInstance<GameConfiguration>();
 
-            configuration.Constructor(container.Days.Select(MapDay).ToArray());
-            
+            // configuration.Constructor();
+              
             return configuration;
-        }
-
-        private ShopDaySettings MapDay(DayTableParser.Day rawDay)
-        {
-            if (rawDay.LevelId is null || rawDay.LevelTime is null) 
-                throw new Exception(nameof(MapDay));
-            return new ShopDaySettings((int)rawDay.LevelId, (TimeSpan)rawDay.LevelTime);
         }
 
         public sealed class MapperDataContainer
         {
+            public GeneralTableParser.GeneralSettings General;
             public DayTableParser.Day[] Days;
             public OrderTableParser.Order[] Orders;
             public CustomersParser.Customer[] Customers;

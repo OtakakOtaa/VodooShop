@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-using System.Linq;
 using CodeBase.Editor.OriginGameConfig.TableParsers.ParserTemplate;
 using JetBrains.Annotations;
 
@@ -14,46 +12,40 @@ namespace CodeBase.Editor.OriginGameConfig.TableParsers.Tables
                 case DialogueTable.Id:
                     entity.Id = field;
                     break;
-                case DialogueTable.Chapter1 or 
-                    DialogueTable.Chapter2 or 
-                    DialogueTable.Chapter3 or 
-                    DialogueTable.Chapter4 or 
-                    DialogueTable.Chapter5:
-                    entity.Chapters.Add(field);
+                case DialogueTable.Speak:
+                    entity.Speak = RestoreTextWithComma(field);
+                    break;
+                case DialogueTable.PromptSpeak:
+                    entity.PromptSpeak = RestoreTextWithComma(field);
                     break;
             }
         }
 
         protected override bool IsEntityFilled(Dialogue entity)
-            => entity.Id is not null && entity.Chapters.Count > 0;
+            => entity.Id is not null && entity.PromptSpeak is not null && entity.Speak is not null;
 
         public sealed class DialogueTable : TableTemplate
         {
             public const string Id = "id";
-            public const string Chapter1 = "chapter_1";
-            public const string Chapter2 = "chapter_2";
-            public const string Chapter3 = "chapter_3";
-            public const string Chapter4 = "chapter_4";
-            public const string Chapter5 = "chapter_5";
+            public const string Speak = "speak";
+            public const string PromptSpeak = "what";
 
             public DialogueTable()
                 => IdKey = Id;
 
             public override bool HasBeenDetected => Keys.ContainsKey(Id) &&
-                                                    Keys.ContainsKey(Chapter1) &&
-                                                    Keys.ContainsKey(Chapter2) &&
-                                                    Keys.ContainsKey(Chapter3) &&
-                                                    Keys.ContainsKey(Chapter4) &&
-                                                    Keys.ContainsKey(Chapter5);
-
+                                                    Keys.ContainsKey(PromptSpeak) &&
+                                                    Keys.ContainsKey(Speak);
+            
             public override bool ThisReadKey(string comparedField)
-                => comparedField is Id or Chapter1 or Chapter2 or Chapter3 or Chapter4 or Chapter5;
+                => comparedField is Id or Speak or PromptSpeak;
         }
 
         public sealed class Dialogue
         {
             [CanBeNull] public string Id;
-            public readonly List<string> Chapters = Enumerable.Empty<string>().ToList();
+            [CanBeNull] public string Speak;
+            [CanBeNull] public string PromptSpeak;
         }
     }
 }

@@ -8,8 +8,10 @@ namespace CodeBase.Editor.OriginGameConfig.TableParsers.ParserTemplate
     {
         private const string EmptyFlag = "";
         private const char TimeSeparator = ':';
+        private const char CommaSubstitute = '*';
         private const char EnumerableSeparator = ';';
         private const char Space = ' ';
+        private const char NullFlag = '-';
         private const char RangeSeparator = '-';
 
         public IEnumerable<TEntity> Parse(string rawData)
@@ -31,7 +33,7 @@ namespace CodeBase.Editor.OriginGameConfig.TableParsers.ParserTemplate
 
                     if (table.TryGetKey(i, out var key) is false) continue;
                     if (TableEnded(field, key, table)) return tableEntities;
-                    if (field is EmptyFlag) continue;
+                    if (field is EmptyFlag || field == NullFlag.ToString()) continue;
 
                     FillEntity(field, entity, key);
                 }
@@ -70,5 +72,11 @@ namespace CodeBase.Editor.OriginGameConfig.TableParsers.ParserTemplate
             var rangeValues = field.Trim(Space).Split(RangeSeparator).Select(int.Parse).ToArray();
             return new Range(rangeValues.First(), rangeValues.Last());
         }
+
+        protected string RestoreTextWithComma(string text)
+            => text.Replace(CommaSubstitute.ToString(), ",");
+
+        protected string TryCatchNullFlag(string field)
+            => field == NullFlag.ToString() ? string.Empty : field;
     }
 }

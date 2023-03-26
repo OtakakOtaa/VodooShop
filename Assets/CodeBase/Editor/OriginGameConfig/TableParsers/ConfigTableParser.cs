@@ -1,7 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using CodeBase.Editor.OriginGameConfig.TableParsers.Tables;
-using CodeBase.Runtime;
+using CodeBase.Runtime.Configuration;
 
 namespace CodeBase.Editor.OriginGameConfig.TableParsers
 {
@@ -10,6 +10,7 @@ namespace CodeBase.Editor.OriginGameConfig.TableParsers
         private readonly GameConfigOriginLoader.OriginSettings _originSettings;
         private readonly GameConfigMapper _gameConfigMapper = new ();
 
+        private readonly GeneralTableParser _generalTableParser = new();
         private readonly DayTableParser _dayTableParser = new ();
         private readonly OrderTableParser _orderTableParser = new ();
         private readonly CustomersParser _customersParser = new ();
@@ -23,6 +24,7 @@ namespace CodeBase.Editor.OriginGameConfig.TableParsers
         {
             GameConfigMapper.MapperDataContainer container = new()
             {
+                General = _generalTableParser.Parse(rawTables[_originSettings.GeneralKey]).First(),
                 Days = _dayTableParser.Parse(rawTables[_originSettings.DayKey]).ToArray(),
                 Orders = _orderTableParser.Parse(rawTables[_originSettings.OrderKey]).ToArray(),
                 Customers = _customersParser.Parse(rawTables[_originSettings.CustomerKey]).ToArray(),

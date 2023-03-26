@@ -2,9 +2,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CodeBase.Editor.OriginGameConfig.TableParsers;
-using CodeBase.Runtime;
+using CodeBase.Runtime.Configuration;
 using Cysharp.Threading.Tasks;
-using UnityEditor;
 using UnityEngine.Networking;
 
 namespace CodeBase.Editor.OriginGameConfig
@@ -37,9 +36,11 @@ namespace CodeBase.Editor.OriginGameConfig
 
         public class OriginSettings
         {
-            private const string RootUrl =
-                "https://docs.google.com/spreadsheets/d/18tM5AINSJw7L4NV0i85Un1JLPVA612AVH4bTBlZK6iY/export?format=csv&gid=";
+            private const string RootUrl = "https://docs.google.com/spreadsheets" +
+                                           "/d/18tM5AINSJw7L4NV0i85Un1JLPVA612AVH4bTBlZK6iY" +
+                                           "/export?format=csv&gid=";
 
+            private const string GeneralTableId = "0";
             private const string DayTableId = "81119051";
             private const string CustomerTableId = "972599682";
             private const string CustomerPoolTableId = "909201559";
@@ -51,6 +52,7 @@ namespace CodeBase.Editor.OriginGameConfig
             private Dictionary<string, string> BuildPages()
                 => new()
                 {
+                    [GeneralKey] = RootUrl + GeneralTableId,
                     [DayKey] = RootUrl + DayTableId,
                     [OrderKey] = RootUrl + OrderTableId,
                     [CustomerKey] = RootUrl + CustomerTableId,
@@ -58,11 +60,12 @@ namespace CodeBase.Editor.OriginGameConfig
                     [PoolKey] = RootUrl + CustomerPoolTableId,
                 };
 
+            public string GeneralKey => nameof(GeneralKey);
             public string DayKey => nameof(DayKey);
             public string OrderKey => nameof(OrderKey);
             public string CustomerKey => nameof(CustomerKey);
             public string PoolKey => nameof(PoolKey);
-            
+
             public string DialogueKey => nameof(DialogueKey);
         }
     }
