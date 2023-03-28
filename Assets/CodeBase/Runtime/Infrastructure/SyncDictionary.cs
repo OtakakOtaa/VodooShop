@@ -8,17 +8,24 @@ namespace CodeBase.Runtime.Infrastructure
     [Serializable]
     public sealed class SyncDictionary<TKey, TValue>
     {
-        [SerializeField] private List<TKey> _keys;
-        [SerializeField] private List<TValue> _values;
-
+        [SerializeField] private List<Pair> _items;
+        
         public SyncDictionary(IEnumerable<TKey> keys, IEnumerable<TValue> values)
         {
-            _keys = keys.ToList();
-            _values = values.ToList();
+            _items = keys
+                .Select((k, i) => new KeyValuePair<TKey,TValue>(k, values.ElementAt(i)))
+                .Select(p => new Pair { Key = p.Key, Value = p.Value })
+                .ToList();
         }
 
-        public List<TKey> Keys => _keys;
-        public List<TValue> Values => _values;
+        public IEnumerable<TKey> Keys => _items.Select(p => p.Key);
+        public IEnumerable<TValue> Values => _items.Select(p => p.Value);
+
+        [Serializable] private class Pair
+        {
+            [SerializeField] public TKey Key;
+            [SerializeField] public TValue Value;
+        }
     }
 
     public static class ExtensionForSyncDictionary
@@ -34,7 +41,7 @@ namespace CodeBase.Runtime.Infrastructure
         {
             Dictionary<TKey, TValue> dictionary = new();
             for (var i = 0; i < sources.Values.Count(); i++)
-                dictionary[sources.Keys[i]] = sources.Values[i];
+                dictionary[sources.Keys.ElementAt(i)] = sources.Values.ElementAt(i);
             return dictionary;
         }
     }

@@ -1,10 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using CodeBase.Runtime.Core._Customer;
 using UnityEngine;
 
-namespace CodeBase.Runtime.Core
+namespace CodeBase.Runtime.Core._Customer
 {
     [Serializable] public sealed class PlotCustomer : Customer
     {

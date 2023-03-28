@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace CodeBase.Runtime.Core._Customer
+namespace CodeBase.Runtime.Core
 {
     [Serializable] public sealed class CustomerOrder
     {
