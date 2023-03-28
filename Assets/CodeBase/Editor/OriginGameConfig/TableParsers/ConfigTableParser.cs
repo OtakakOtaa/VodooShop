@@ -8,8 +8,7 @@ namespace CodeBase.Editor.OriginGameConfig.TableParsers
     public sealed class ConfigTableParser
     {
         private readonly GameConfigOriginLoader.OriginSettings _originSettings;
-        private readonly GameConfigMapper _gameConfigMapper = new ();
-
+        
         private readonly GeneralTableParser _generalTableParser = new();
         private readonly DayTableParser _dayTableParser = new ();
         private readonly OrderTableParser _orderTableParser = new ();
@@ -31,7 +30,7 @@ namespace CodeBase.Editor.OriginGameConfig.TableParsers
                 Pools = _customerPoolsParser.Parse(rawTables[_originSettings.PoolKey]).ToArray(),
                 Dialogues = _dialogueParser.Parse(rawTables[_originSettings.DialogueKey]).ToArray()
             };
-            return _gameConfigMapper.TranslateToConfigFormat(container);
+            return new GameConfigMapper(container).TranslateToConfigFormat();
         }
         
     }

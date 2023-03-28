@@ -1,26 +1,46 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
+using CodeBase.Runtime.Core;
 using CodeBase.Runtime.Core._Customer;
+using JetBrains.Annotations;
+
+// ReSharper disable PossibleMultipleEnumeration
 
 namespace CodeBase.Runtime._CustomersProvider
 {
     public sealed class CustomersProvider
     {
-        private readonly Customer[] _allCustomers;
+        private readonly Customer[] _simpleCustomers;
+        private readonly Dictionary<int, PlotCustomer> _plotCustomers;
 
-        public CustomersProvider(IEnumerable<Customer> customers)
-            => _allCustomers = customers.ToArray();
-
-        public bool TryGetCustomerByName(string name, out Customer customer)
+        public CustomersProvider(IEnumerable<Customer> simpleCustomers, Dictionary<int, PlotCustomer> plotCustomers)
+        {
+            _simpleCustomers = simpleCustomers.ToArray();
+            _plotCustomers = plotCustomers;
+        }
+        
+        public bool TryGetCustomerById(string name, out Customer customer)
         {
             customer = null;
-            try
-            {
-                customer = _allCustomers.First(c=> c.Name == name);
-                return true;
-            }
-            catch (Exception _) { return false; }
+            var simple = _simpleCustomers.Where(c => c.Name == name);
+            var plot = _plotCustomers
+                .Where(p => p.Value.Name == name)
+                .Select(p => p.Value);
+
+            if (simple.Any() is false && plot.Any() is false)
+                return false;
+
+            customer = simple.Any() is false ? plot.First() : simple.First();
+            return true;
         }
+
+        [CanBeNull]
+        public PlotCustomer TryGetPlotCustomerThatDay(int day)
+            => _plotCustomers.TryGetValue(day, out var customer) ? customer : null;
+
+        public IEnumerable<Customer> AllCustomers => _simpleCustomers.Union(_plotCustomers.Values);
+        public IEnumerable<Customer> SimpleCustomers => _simpleCustomers;
+        public IEnumerable<PlotCustomer> PlotCustomers => _plotCustomers.Values;
+        
     }
 }

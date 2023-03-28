@@ -18,15 +18,10 @@ namespace CodeBase.Runtime.GameStates
         { 
             
         }
-
+        
         private async void BootStrap()
         {
             GameConfiguration config = await _configProvider.GetGameConfiguration();
-            
-            CustomersProvider customersProvider = new (config.AllCustomers);
-            CustomersOnDayProvider customersOnDayProvider = new (customersProvider, config.CustomersPools, 
-                config.OrdersWithoutOwners);
-            
         } 
     }
 }

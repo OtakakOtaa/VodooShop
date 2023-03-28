@@ -6,14 +6,20 @@ namespace CodeBase.Runtime.Core._Customer
 {
     [Serializable] public class Customer
     {
+        [SerializeField] protected string _id;
         [SerializeField] protected string _name;
         [CanBeNull] public CustomerOrder Order { get; private set; }
 
-        public Customer(string name)
-            => _name = name;
-        
+        public Customer(string id, string name)
+        {
+            _id = id;
+            _name = name;
+        }
+            
         public string Name => _name;
-        
+
+        public string Id => _id;
+
         public void PutOrder(CustomerOrder customerOrder) 
             => Order = customerOrder;
     }

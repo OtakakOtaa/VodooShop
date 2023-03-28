@@ -62,7 +62,7 @@ namespace CodeBase.Editor.OriginGameConfig.TableParsers.Tables
             [CanBeNull] public string CustomerId;
             [CanBeNull] public string DialogueId;
             [CanBeNull] public string RequestedItem;
-            [CanBeNull] public int? Reward;
+            [CanBeNull] public float? Reward;
             [CanBeNull] public int? Chapter;
         }
     }

@@ -8,9 +8,12 @@ namespace CodeBase.Runtime.Core
         [SerializeField] private string _speak;
         [SerializeField] private string _prompt;
 
-        public Dialogue(string speak)
-            => _speak = speak;
-
+        public Dialogue(string speak, string prompt)
+        {
+            _speak = speak;
+            _prompt = prompt;
+        }
+            
         public string Speak => _speak;
         public string Prompt => _prompt;
     }
