@@ -14,8 +14,8 @@ namespace CodeBase.Runtime._CustomersProvider.Pool
         
         public CustomersPool(Range levelScope, IEnumerable<string> customers)
         {
-            _levelScopeMinimum = levelScope.End.Value;
-            _levelScopeMaximum = levelScope.Start.Value;
+            _levelScopeMinimum = levelScope.Start.Value;
+            _levelScopeMaximum = levelScope.End.Value;
             _customersKeys = customers.ToArray();
         }
 

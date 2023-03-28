@@ -18,12 +18,12 @@ namespace CodeBase.Runtime.Configuration
         
         [SerializeField] private CustomersPool[] _customersPools;
         [SerializeField] private Customer[] _simpleCustomers;
-        [SerializeField] private SyncDictionary<int, PlotCustomer> _plotCustomers;
+        [SerializeField] private SyncDictionary<int, PlotCustomer> _customersStoryLine;
         [SerializeField] private CustomerOrder[] _ordersWithoutOwners;
         
         public void Constructor(int levelAmount, TimeSpan duration, 
             IEnumerable<CustomersPool> pools, IEnumerable<Customer> simpleCustomers, 
-            SyncDictionary<int, PlotCustomer> plotCustomers, IEnumerable<CustomerOrder> ordersWithoutOwners)
+            SyncDictionary<int, PlotCustomer> customersStoryLine, IEnumerable<CustomerOrder> ordersWithoutOwners)
         {
             _levelAmount = levelAmount;
             _duration = duration.ToString();
@@ -31,15 +31,22 @@ namespace CodeBase.Runtime.Configuration
             _customersPools = pools.ToArray();
             _simpleCustomers = simpleCustomers.ToArray();
             _ordersWithoutOwners = ordersWithoutOwners.ToArray();
-            _plotCustomers = plotCustomers;
+            _customersStoryLine = customersStoryLine;
         }
         
         public int LevelAmount => _levelAmount;
+        
         public TimeSpan Duration => TimeSpan.Parse(_duration);
+        
         public IEnumerable<CustomersPool> CustomersPools => _customersPools;
+        
         public IEnumerable<CustomerOrder> OrdersWithoutOwners => _ordersWithoutOwners;
+        
         public IEnumerable<Customer> SimpleCustomers => _simpleCustomers;
-        public IEnumerable<PlotCustomer> PlotCustomers => _plotCustomers.Values;
+        
+        public IEnumerable<PlotCustomer> PlotCustomers => _customersStoryLine.Values.Distinct();
+        
+        public Dictionary<int, PlotCustomer> StoryLine => _customersStoryLine.ToDictionary();
         
     }
 }
