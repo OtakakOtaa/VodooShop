@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace CodeBase.Runtime.Core._Customer.View
 {
-    [Serializable] public class CustomerView
+    [Serializable] public sealed class CustomerView
     {
         [SerializeField] private string _customerId;
         [SerializeField] private Sprite _sprite;

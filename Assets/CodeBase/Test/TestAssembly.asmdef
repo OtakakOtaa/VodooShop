@@ -6,7 +6,8 @@
         "UnityEditor.TestRunner",
         "Editor",
         "UniTask",
-        "Runtime"
+        "Runtime",
+        "Zenject"
     ],
     "includePlatforms": [
         "Editor"

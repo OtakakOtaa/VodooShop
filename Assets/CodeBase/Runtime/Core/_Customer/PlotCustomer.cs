@@ -13,12 +13,9 @@ namespace CodeBase.Runtime.Core._Customer
         public PlotCustomer(string id, string name, IEnumerable<CustomerOrder> story) : base(id, name)
             => _story = story.ToArray();
 
-        public bool NextPart(out CustomerOrder storyPart)
-        {
-            storyPart = null;
-            if (_currentStoryPosition == _story.Length) return false;
-            storyPart = _story[_currentStoryPosition++];
-            return true;
-        }
+        public CustomerOrder CustomerOrder => _story[_currentStoryPosition];
+
+        public void ForceStoryLine()
+            => _currentStoryPosition = Math.Clamp(++_currentStoryPosition, 0, _story.Length - 1);
     }
 }

@@ -14,66 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _levelAmount: 10
   _duration: 00:04:00
-  _customersPools:
-  - _levelScopeMinimum: 1
-    _levelScopeMaximum: 4
-    _customersKeys:
-    - _frog
-    - ' _wolf'
-    - ' _cheese'
-    - ' _fortune_teller'
-    - ' _clown'
-    - ' _wiking'
-  - _levelScopeMinimum: 2
-    _levelScopeMaximum: 7
-    _customersKeys:
-    - _wolf
-    - ' _franken'
-    - ' _einstein'
-    - ' _ogre'
-    - ' _ninza'
-  - _levelScopeMinimum: 5
-    _levelScopeMaximum: 10
-    _customersKeys:
-    - _drakula
-    - ' _pirat'
-    - ' _fairy'
-    - ' _indeez'
-    - ' _mumia'
-    - ' _ghost'
-  _simpleCustomers:
-  - _id: _drakula
-    _name: "\u0414\u0440\u0430\u043A\u0443\u043B\u0430"
-  - _id: _franken
-    _name: "\u0424\u0440\u0430\u043D\u043A\u0435\u043D\u0448\u0442\u0435\u0439\u043D"
-  - _id: _einstein
-    _name: "\u042D\u0439\u043D\u0448\u0442\u0435\u0439\u043D"
-  - _id: _pirat
-    _name: "\u041F\u0438\u0440\u0430\u0442"
-  - _id: _fairy
-    _name: "\u0424\u0435\u0435\u0447\u043A\u0430"
-  - _id: _ninza
-    _name: "\u041D\u0438\u043D\u0434\u0437\u044F"
-  - _id: _frog
-    _name: "\u041B\u044F\u0433\u0443\u0448\u043A\u0430"
-  - _id: _mumia
-    _name: "\u041C\u0443\u043C\u0438\u044F"
-  - _id: _wolf
-    _name: "\u041E\u0431\u043E\u0440\u043E\u0442\u0435\u043D\u044C"
-  - _id: _wiking
-    _name: "\u0412\u0438\u043A\u0438\u043D\u0433"
-  - _id: _clown
-    _name: "\u041A\u043B\u043E\u0443\u043D"
-  - _id: _ghost
-    _name: "\u041F\u0440\u0438\u0432\u0438\u0434\u0435\u043D\u0438\u0435"
-  - _id: _indeez
-    _name: "\u0418\u043D\u0434\u0435\u0435\u0446"
-  - _id: _cheese
-    _name: "\u0427\u0435\u043B\u043E\u0432\u0435\u043A \u0421\u044B\u0440"
-  - _id: _ogre
-    _name: "\u041E\u0433\u0440"
-  - _id: _fortune_teller
-    _name: "\u0413\u0430\u0434\u0430\u043B\u043A\u0430"
   _customersStoryLine:
     _items:
     - Key: 1
@@ -449,6 +389,65 @@ MonoBehaviour:
             _speak: TODO
             _prompt: TODO
         _currentStoryPosition: 0
+  _simpleCustomers:
+  - _id: _drakula
+    _name: "\u0414\u0440\u0430\u043A\u0443\u043B\u0430"
+  - _id: _franken
+    _name: "\u0424\u0440\u0430\u043D\u043A\u0435\u043D\u0448\u0442\u0435\u0439\u043D"
+  - _id: _einstein
+    _name: "\u042D\u0439\u043D\u0448\u0442\u0435\u0439\u043D"
+  - _id: _pirat
+    _name: "\u041F\u0438\u0440\u0430\u0442"
+  - _id: _fairy
+    _name: "\u0424\u0435\u0435\u0447\u043A\u0430"
+  - _id: _ninza
+    _name: "\u041D\u0438\u043D\u0434\u0437\u044F"
+  - _id: _frog
+    _name: "\u041B\u044F\u0433\u0443\u0448\u043A\u0430"
+  - _id: _mumia
+    _name: "\u041C\u0443\u043C\u0438\u044F"
+  - _id: _wolf
+    _name: "\u041E\u0431\u043E\u0440\u043E\u0442\u0435\u043D\u044C"
+  - _id: _wiking
+    _name: "\u0412\u0438\u043A\u0438\u043D\u0433"
+  - _id: _clown
+    _name: "\u041A\u043B\u043E\u0443\u043D"
+  - _id: _ghost
+    _name: "\u041F\u0440\u0438\u0432\u0438\u0434\u0435\u043D\u0438\u0435"
+  - _id: _indeez
+    _name: "\u0418\u043D\u0434\u0435\u0435\u0446"
+  - _id: _cheese
+    _name: "\u0427\u0435\u043B\u043E\u0432\u0435\u043A \u0421\u044B\u0440"
+  - _id: _ogre
+    _name: "\u041E\u0433\u0440"
+  - _id: _fortune_teller
+    _name: "\u0413\u0430\u0434\u0430\u043B\u043A\u0430"
+  _customersPools:
+  - _levelScopeMinimum: 1
+    _levelScopeMaximum: 4
+    _customersKeys:
+    - _frog
+    - ' _cheese'
+    - ' _fortune_teller'
+    - ' _clown'
+    - ' _wiking'
+  - _levelScopeMinimum: 2
+    _levelScopeMaximum: 7
+    _customersKeys:
+    - _wolf
+    - ' _franken'
+    - ' _einstein'
+    - ' _ogre'
+    - ' _ninza'
+  - _levelScopeMinimum: 5
+    _levelScopeMaximum: 10
+    _customersKeys:
+    - _drakula
+    - ' _pirat'
+    - ' _fairy'
+    - ' _indeez'
+    - ' _mumia'
+    - ' _ghost'
   _ordersWithoutOwners:
   - _reward: 200
     _requestedItem: TODO
@@ -541,3 +540,4 @@ MonoBehaviour:
         \u043A \u0447\u0435\u043C\u0443 \u044F \u043F\u0440\u0438\u043A\u0430\u0441\u0430\u044E\u0441\u044C,
         \u0440\u0430\u0437\u0432\u0430\u043B\u0438\u0432\u0430\u0435\u0442\u0441\u044F..."
       _prompt: TODO
+  _customersView: {fileID: 0}

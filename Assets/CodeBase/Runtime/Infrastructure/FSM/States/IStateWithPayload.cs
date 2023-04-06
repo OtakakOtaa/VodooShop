@@ -1,9 +1,8 @@
 namespace CodeBase.Runtime.Infrastructure.FSM.States
 {
-    public abstract class StateWithPayload<TPayload> : State
+    public interface IStateWithPayload<in TPayload> : IState
     {
-        public abstract void Enter(TPayload payload);
-        public override void Enter() { }
+        void Enter(TPayload payload);
     }    
 }
 

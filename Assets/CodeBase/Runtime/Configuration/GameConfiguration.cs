@@ -13,13 +13,21 @@ namespace CodeBase.Runtime.Configuration
     [CreateAssetMenu(menuName = nameof(GameConfiguration), fileName = nameof(GameConfiguration), order = default)]
     public sealed class GameConfiguration : ScriptableObject
     {
+        [Space] [Header("General Game Settings")] [Space]
         [SerializeField, ViewInInspector] private int _levelAmount;
         [SerializeField, ViewInInspector] private string _duration;
         
-        [SerializeField] private CustomersPool[] _customersPools;
-        [SerializeField] private Customer[] _simpleCustomers;
+        [Space] [Header("Customers && Pools && StoryLine")] [Space]
         [SerializeField] private SyncDictionary<int, PlotCustomer> _customersStoryLine;
+        [SerializeField] private Customer[] _simpleCustomers;
+        [SerializeField] private CustomersPool[] _customersPools;
+
+        [Space] [Header("Free Orders")] [Space]
         [SerializeField] private CustomerOrder[] _ordersWithoutOwners;
+
+        [Space] [Header("Customers View")] [Space] 
+        [SerializeField] private CustomersViewConfiguration _customersView;
+        
         
         public void Constructor(int levelAmount, TimeSpan duration, 
             IEnumerable<CustomersPool> pools, IEnumerable<Customer> simpleCustomers, 
@@ -47,6 +55,5 @@ namespace CodeBase.Runtime.Configuration
         public IEnumerable<PlotCustomer> PlotCustomers => _customersStoryLine.Values.Distinct();
         
         public Dictionary<int, PlotCustomer> StoryLine => _customersStoryLine.ToDictionary();
-        
     }
 }

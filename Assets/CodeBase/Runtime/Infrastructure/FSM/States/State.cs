@@ -1,6 +1,6 @@
 namespace CodeBase.Runtime.Infrastructure.FSM.States
 {
-    public abstract class State
+    public interface IState
     {
         public abstract void Enter();
     }    
