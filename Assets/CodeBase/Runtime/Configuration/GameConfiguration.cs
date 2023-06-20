@@ -5,7 +5,7 @@ using CodeBase.Runtime._CustomersProvider.Pool;
 using CodeBase.Runtime.Core;
 using CodeBase.Runtime.Core._Customer;
 using CodeBase.Runtime.Infrastructure;
-using CodeBase.Runtime.Infrastructure.InternalTools;
+using CodeBase.Runtime.Infrastructure.Collections;
 using UnityEngine;
 
 namespace CodeBase.Runtime.Configuration
@@ -14,8 +14,8 @@ namespace CodeBase.Runtime.Configuration
     public sealed class GameConfiguration : ScriptableObject
     {
         [Space] [Header("General Game Settings")] [Space]
-        [SerializeField, ViewInInspector] private int _levelAmount;
-        [SerializeField, ViewInInspector] private string _duration;
+        [SerializeField] private int _levelAmount;
+        [SerializeField] private string _duration;
         
         [Space] [Header("Customers && Pools && StoryLine")] [Space]
         [SerializeField] private SyncDictionary<int, PlotCustomer> _customersStoryLine;

@@ -7,6 +7,7 @@ using CodeBase.Runtime.Configuration;
 using CodeBase.Runtime.Core;
 using CodeBase.Runtime.Core._Customer;
 using CodeBase.Runtime.Infrastructure;
+using CodeBase.Runtime.Infrastructure.Collections;
 using UnityEngine;
 
 namespace CodeBase.Editor.OriginGameConfig

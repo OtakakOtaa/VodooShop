@@ -6,8 +6,13 @@ namespace CodeBase.Runtime.Configuration
     public sealed class GameConfigProvider
     {
         public const string MainConfigurationPatch = "Assets/Resources/MainGameConfiguration.asset";
+        private GameConfiguration _cachedGameConfiguration;
         
         public async UniTask<GameConfiguration> GetGameConfiguration()
-            => (GameConfiguration) await Resources.LoadAsync<GameConfiguration>(MainConfigurationPatch).ToUniTask();
+        {
+            _cachedGameConfiguration ??=
+                (GameConfiguration)await Resources.LoadAsync<GameConfiguration>(MainConfigurationPatch).ToUniTask();
+            return _cachedGameConfiguration;
+        }
     }
 }

@@ -4,6 +4,7 @@ using System.Linq;
 using CodeBase.Runtime.Core;
 using CodeBase.Runtime.Core._Customer;
 using CodeBase.Runtime.Infrastructure;
+using CodeBase.Runtime.Infrastructure.Collections;
 
 // ReSharper disable PossibleMultipleEnumeration
 

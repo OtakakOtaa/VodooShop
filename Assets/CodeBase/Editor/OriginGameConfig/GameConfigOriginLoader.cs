@@ -36,7 +36,10 @@ namespace CodeBase.Editor.OriginGameConfig
 
         public class OriginSettings
         {
-            private const string RootUrl = "https://docs.google.com/spreadsheets" +
+            public const string RootUrl =
+                    "https://docs.google.com/spreadsheets/d/18tM5AINSJw7L4NV0i85Un1JLPVA612AVH4bTBlZK6iY/edit#gid=0";
+            
+            private const string RootUrlForDownload = "https://docs.google.com/spreadsheets" +
                                            "/d/18tM5AINSJw7L4NV0i85Un1JLPVA612AVH4bTBlZK6iY" +
                                            "/export?format=csv&gid=";
 
@@ -52,12 +55,12 @@ namespace CodeBase.Editor.OriginGameConfig
             private Dictionary<string, string> BuildPages()
                 => new()
                 {
-                    [GeneralKey] = RootUrl + GeneralTableId,
-                    [DayKey] = RootUrl + DayTableId,
-                    [OrderKey] = RootUrl + OrderTableId,
-                    [CustomerKey] = RootUrl + CustomerTableId,
-                    [DialogueKey] = RootUrl + DialogueTableId,
-                    [PoolKey] = RootUrl + CustomerPoolTableId,
+                    [GeneralKey] = RootUrlForDownload + GeneralTableId,
+                    [DayKey] = RootUrlForDownload + DayTableId,
+                    [OrderKey] = RootUrlForDownload + OrderTableId,
+                    [CustomerKey] = RootUrlForDownload + CustomerTableId,
+                    [DialogueKey] = RootUrlForDownload + DialogueTableId,
+                    [PoolKey] = RootUrlForDownload + CustomerPoolTableId,
                 };
 
             public string GeneralKey => nameof(GeneralKey);
