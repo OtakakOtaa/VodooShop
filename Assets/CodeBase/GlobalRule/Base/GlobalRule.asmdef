@@ -1,0 +1,18 @@
+{
+    "name": "GlobalRule",
+    "rootNamespace": "",
+    "references": [
+        "GUID:de281793c3e435e40b85690b53d4c665",
+        "GUID:ca6bbb6a35d099d42a5d4a54ea0dd15b",
+        "GUID:b0214a6008ed146ff8f122a6a9c2f6cc"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

@@ -1,5 +1,5 @@
 using System.Collections;
-using CodeBase.Editor.OriginGameConfig;
+using CodeBase.Configuration.GameRemoteConfigurationLoader;
 using Cysharp.Threading.Tasks;
 using UnityEngine.TestTools;
 

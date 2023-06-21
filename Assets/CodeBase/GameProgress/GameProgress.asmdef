@@ -1,0 +1,4 @@
+{
+	"name": "GameProgress",
+	"references":[ "GUID:3cb19152261c6b344bce0570bab89310", "GUID:b71f346cdda84b04cad788d11443bcd9" ]
+}

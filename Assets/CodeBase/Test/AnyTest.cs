@@ -1,7 +1,5 @@
 using System;
-using CodeBase.Runtime;
 using NUnit.Framework;
-using UnityEngine;
 
 namespace CodeBase.Test
 {
