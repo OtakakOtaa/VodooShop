@@ -14,10 +14,10 @@ namespace CodeBase.Configuration.Data
         [Space] [Header("General Game Settings")] [Space]
         [SerializeField] private int _levelAmount;
         [SerializeField] private string _duration;
-        
+
         [Space] [Header("Customers && Pools && StoryLine")] [Space]
         [SerializeField] private SyncDictionary<int, PlotCustomer> _customersStoryLine;
-        [SerializeField] private Customer[] _simpleCustomers;
+        [SerializeField] public Customer[] _simpleCustomers;
         [SerializeField] private CustomersPool[] _customersPools;
 
         [Space] [Header("Free Orders")] [Space]
@@ -25,8 +25,7 @@ namespace CodeBase.Configuration.Data
 
         [Space] [Header("Customers View")] [Space] 
         [SerializeField] private CustomersViewConfiguration _customersView;
-        
-        
+
         public void Constructor(int levelAmount, TimeSpan duration, 
             IEnumerable<CustomersPool> pools, IEnumerable<Customer> simpleCustomers, 
             SyncDictionary<int, PlotCustomer> customersStoryLine, IEnumerable<CustomerOrder> ordersWithoutOwners)

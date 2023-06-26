@@ -1,3 +1,4 @@
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -13,7 +14,14 @@ namespace Editor
                 var sceneAttribute = (ApplicationScene)attribute;
                 
                 EditorGUI.BeginProperty(position, label, property);
-                
+
+                var ifAssetRefCleared = property.stringValue is not null && sceneAttribute.SceneAssetPath is null;
+                if (ifAssetRefCleared)
+                {
+                     var guid = AssetDatabase.FindAssets(property.stringValue).First();
+                     sceneAttribute.SceneAssetPath = AssetDatabase.GUIDToAssetPath(guid);
+                }
+
                 EditorGUI.BeginChangeCheck();
                 var target = EditorGUI.ObjectField(position,
                     label,

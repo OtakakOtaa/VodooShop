@@ -1,0 +1,19 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="True">
+    <ui:VisualElement name="panel" style="width: 350px; height: 450px; margin-top: 6px; margin-bottom: 0;">
+        <ui:GroupBox name="level-box" style="background-color: rgb(48, 35, 35); -unity-background-scale-mode: scale-to-fit; border-top-left-radius: 16px; border-bottom-left-radius: 0; border-top-right-radius: 16px; border-bottom-right-radius: 16px; font-size: 1px; margin-left: 4px; margin-right: 0; margin-top: 7px; flex-direction: column; align-items: flex-start; height: auto;">
+            <ui:Label text="Level" display-tooltip-when-elided="true" name="level-header" style="justify-content: flex-start; -unity-text-align: upper-left; -unity-font: url(&apos;project://database/Assets/EntityAssets/UI/MainMenu/ConcertOne-Regular.ttf?fileID=12800000&amp;guid=1a637abd85080d74684911d077f8601d&amp;type=3#ConcertOne-Regular&apos;); -unity-font-style: bold-and-italic; font-size: 24px; white-space: nowrap; -unity-text-outline-width: 0; -unity-text-outline-color: rgba(255, 44, 44, 0.7); width: 61px; letter-spacing: 4px; margin-left: 0; margin-top: -17px;" />
+            <ui:GroupBox name="box" style="height: initial; width: initial; flex-direction: column; justify-content: flex-start; align-items: flex-start; margin-left: 4px; margin-right: 4px; margin-top: 4px; margin-bottom: 4px; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; flex-shrink: initial; flex-grow: initial; flex-basis: initial;">
+                <uie:PropertyField name="levels-amount" binding-path="_levelAmount" label="Levels Count" style="width: auto; font-size: 14px; height: auto; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; translate: 0 0; justify-content: flex-start; align-items: auto;" />
+                <uie:PropertyField name="level-time" binding-path="_duration" label="Level Time" style="width: auto; height: auto; font-size: 14px; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; align-items: flex-start; translate: 0 0;" />
+            </ui:GroupBox>
+        </ui:GroupBox>
+        <ui:GroupBox name="story-box" style="background-color: rgb(48, 35, 35); -unity-background-scale-mode: scale-to-fit; border-top-left-radius: 16px; border-bottom-left-radius: 0; border-top-right-radius: 16px; border-bottom-right-radius: 16px; font-size: 1px; margin-left: 4px; margin-right: 0; margin-top: 7px; flex-direction: column; align-items: flex-start; height: auto; width: initial;">
+            <ui:Label text="Story line" display-tooltip-when-elided="true" name="story-header" style="justify-content: flex-start; -unity-text-align: upper-left; -unity-font: url(&apos;project://database/Assets/EntityAssets/UI/MainMenu/ConcertOne-Regular.ttf?fileID=12800000&amp;guid=1a637abd85080d74684911d077f8601d&amp;type=3#ConcertOne-Regular&apos;); -unity-font-style: bold-and-italic; font-size: 24px; white-space: nowrap; -unity-text-outline-width: 0; -unity-text-outline-color: rgba(255, 44, 44, 0.7); width: 61px; letter-spacing: 4px; margin-left: 0; margin-top: -17px;" />
+            <ui:GroupBox name="story-line" style="flex-direction: row; width: 100%; height: auto; align-items: stretch; justify-content: space-around;">
+                <ui:Label text="DAY" display-tooltip-when-elided="true" style="width: 71px; font-size: 14px; -unity-text-align: middle-left; -unity-font-style: bold;" />
+                <ui:Label text="Customer" display-tooltip-when-elided="true" style="width: 71px; font-size: 14px; -unity-text-align: middle-left; -unity-font-style: bold; white-space: nowrap;" />
+            </ui:GroupBox>
+            <ui:ListView focusable="true" name="story-line-list" fixed-item-height="40" virtualization-method="DynamicHeight" style="width: auto; height: auto;" />
+        </ui:GroupBox>
+    </ui:VisualElement>
+</ui:UXML>

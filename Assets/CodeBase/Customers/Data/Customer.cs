@@ -9,7 +9,7 @@ namespace CodeBase.Customers.Data
         [SerializeField] protected string _id;
         [SerializeField] protected string _name;
         [CanBeNull] public CustomerOrder Order { get; private set; }
-
+        
         public Customer(string id, string name)
         {
             _id = id;

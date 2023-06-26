@@ -6,20 +6,20 @@ using CodeBase.Infrastructure.FSM.States;
 
 namespace CodeBase.GlobalRule.Base.GlobalStateMachine.StateMachine
 {
-    public sealed class GlobalGameGameStateMachine : IFinalStateMachine, ICurrentGameStateProvider
+    public sealed class GlobalGameStateMachine : IFinalStateMachine, ICurrentGameStateProvider
     {
         private readonly TypesCollector _statesType;
         private readonly IStateFactory _stateFactory;
         
         public IState CurrentState { get; private set; }
 
-        public GlobalGameGameStateMachine(TypesCollector statesType, IStateFactory stateFactory)
+        public GlobalGameStateMachine(TypesCollector statesType, IStateFactory stateFactory)
         {
             _stateFactory = stateFactory;
             _statesType = statesType;
         }
 
-        public void Enter<TState>() where TState : IState, new()
+        public void Enter<TState>() where TState : class, IState
         {
             CheckStateForAvailability<TState>();
             
@@ -29,7 +29,7 @@ namespace CodeBase.GlobalRule.Base.GlobalStateMachine.StateMachine
         }
 
         public void Enter<TPayload, TStateWithPayload>(TPayload payload) 
-            where TStateWithPayload : IStateWithPayload<TPayload>, new()
+            where TStateWithPayload : class, IStateWithPayload<TPayload>
         {
             CheckStateForAvailability<TStateWithPayload>();
             Exit();
@@ -40,11 +40,11 @@ namespace CodeBase.GlobalRule.Base.GlobalStateMachine.StateMachine
         private void Exit()
             => (CurrentState as IExitableState)?.Exit();
 
-        private IState GetState<TState>() where TState : IState, new() 
+        private IState GetState<TState>() where TState : class, IState 
             => _stateFactory.Create<TState>();
 
         private IStateWithPayload<TPayload> GetPayloadState<TPayload, TStateWithPayload>() 
-            where TStateWithPayload : IStateWithPayload<TPayload>, new()
+            where TStateWithPayload : class, IStateWithPayload<TPayload>
             => _stateFactory.CreateStateWithPayload<TPayload, TStateWithPayload>();
 
         private void CheckStateForAvailability<TState>() where TState : IState

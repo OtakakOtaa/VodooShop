@@ -1,16 +1,16 @@
 using System;
-using CodeBase.Application;
 using CodeBase.GlobalRule.Base.GlobalStateMachine.StateMachine;
+using CodeBase.Infrastructure;
 using CodeBase.Infrastructure.FSM.States;
 
 namespace CodeBase.GlobalRule.Base.GlobalStateMachine.GameStates.States
 {
     public sealed class MainMenuState : IState
     {
-        private readonly GlobalGameGameStateMachine _globalGameStateMachine;
-        private readonly ApplicationGates _applicationGates;
+        private readonly GlobalGameStateMachine _globalGameStateMachine;
+        private readonly IApplicationGates _applicationGates;
 
-        public MainMenuState(GlobalGameGameStateMachine globalGameStateMachine, ApplicationGates applicationGates)
+        public MainMenuState(GlobalGameStateMachine globalGameStateMachine, IApplicationGates applicationGates)
         {
             _applicationGates = applicationGates;
             _globalGameStateMachine = globalGameStateMachine;

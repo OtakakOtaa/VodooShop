@@ -1,13 +1,14 @@
 using System;
-using CodeBase.Infrastructure.PreProcessDelegateMethods;
+using CodeBase.Infrastructure;
 using Cysharp.Threading.Tasks;
 using UnityEditor;
 using UnityEngine;
+using static CodeBase.Infrastructure.PreProcessDelegateMethods.UnityPreprocessorConditions;
 using static UnityEngine.SceneManagement.SceneManager;
 
 namespace CodeBase.Application
 {
-    public sealed class ApplicationGates
+    public sealed class ApplicationGates : IApplicationGates
     {
         private Configuration SceneConfiguration { get; }
 
@@ -16,7 +17,7 @@ namespace CodeBase.Application
 
         public void Exit()
         {
-            UnityPreprocessorConditions.InvokeIfUnityEditor(() => EditorApplication.isPlaying = false);
+            InvokeIfUnityEditor(() => EditorApplication.isPlaying = false);
             UnityEngine.Application.Quit();
         }
 
@@ -29,7 +30,7 @@ namespace CodeBase.Application
         [RuntimeInitializeOnLoadMethod]
         private static void Bootstrap()
         {
-            UnityPreprocessorConditions.InvokeIfUnityEditor(() => EditorWindow.focusedWindow.maximized = true);
+            InvokeIfUnityEditor(() => EditorWindow.focusedWindow.maximized = true);
         }
 
         [Serializable] public sealed class Configuration

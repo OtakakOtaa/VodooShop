@@ -16,14 +16,14 @@ namespace CodeBase.GlobalRule.Base.GlobalStateMachine.GameStates.StatesFactory
             _scopeProvider = scopeProvider;
         }
 
-        public IState Create<TState>() where TState : IState, new()
+        public IState Create<TState>() where TState : class, IState
         {
             CheckCreationStateType<TState>();
             return _scopeProvider.GetScope().CreateInstanceFromContainer<TState>();
         }
 
         public IStateWithPayload<TPayload> CreateStateWithPayload<TPayload, TStateWithPayload>()
-            where TStateWithPayload : IStateWithPayload<TPayload>, new()
+            where TStateWithPayload : class, IStateWithPayload<TPayload>
         {
             CheckCreationStateType<IStateWithPayload<TPayload>>();
             return _scopeProvider.GetScope().CreateInstanceFromContainer<IStateWithPayload<TPayload>>();
