@@ -1,13 +1,9 @@
 {
-    "name": "Configuration.Editor",
+    "name": "Levels.Editor",
     "rootNamespace": "",
     "references": [
-        "GUID:40e8b7de7c888144a8b4ab0df24f8725",
-        "GUID:de281793c3e435e40b85690b53d4c665",
-        "GUID:f51ebe6a0ceec4240a699833d6309b23",
-        "GUID:942e7a84fb975e54fbc6257291ec86a8",
-        "GUID:b71f346cdda84b04cad788d11443bcd9",
-        "GUID:51dfa9b3d757efd43adf268753b2f564"
+        "GUID:51dfa9b3d757efd43adf268753b2f564",
+        "GUID:b71f346cdda84b04cad788d11443bcd9"
     ],
     "includePlatforms": [
         "Editor"

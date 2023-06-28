@@ -4,6 +4,7 @@ using System.Linq;
 using CodeBase.Customers.CustomersPool;
 using CodeBase.Customers.Data;
 using CodeBase.Infrastructure.Collections;
+using CodeBase.Levels.Data;
 using UnityEngine;
 
 namespace CodeBase.Configuration.Data
@@ -16,8 +17,8 @@ namespace CodeBase.Configuration.Data
         [SerializeField] private string _duration;
 
         [Space] [Header("Customers && Pools && StoryLine")] [Space]
-        [SerializeField] private SyncDictionary<int, PlotCustomer> _customersStoryLine;
-        [SerializeField] public Customer[] _simpleCustomers;
+        [SerializeField] private StoryLinePart[] _storyLine;
+        [SerializeField] private Customer[] _simpleCustomers;
         [SerializeField] private CustomersPool[] _customersPools;
 
         [Space] [Header("Free Orders")] [Space]
@@ -28,7 +29,7 @@ namespace CodeBase.Configuration.Data
 
         public void Constructor(int levelAmount, TimeSpan duration, 
             IEnumerable<CustomersPool> pools, IEnumerable<Customer> simpleCustomers, 
-            SyncDictionary<int, PlotCustomer> customersStoryLine, IEnumerable<CustomerOrder> ordersWithoutOwners)
+            IEnumerable<StoryLinePart> customersStoryLine, IEnumerable<CustomerOrder> ordersWithoutOwners)
         {
             _levelAmount = levelAmount;
             _duration = duration.ToString();
@@ -36,7 +37,7 @@ namespace CodeBase.Configuration.Data
             _customersPools = pools.ToArray();
             _simpleCustomers = simpleCustomers.ToArray();
             _ordersWithoutOwners = ordersWithoutOwners.ToArray();
-            _customersStoryLine = customersStoryLine;
+            _storyLine = customersStoryLine.ToArray();
         }
         
         public int LevelAmount => _levelAmount;
@@ -49,8 +50,8 @@ namespace CodeBase.Configuration.Data
         
         public IEnumerable<Customer> SimpleCustomers => _simpleCustomers;
         
-        public IEnumerable<PlotCustomer> PlotCustomers => _customersStoryLine.Values.Distinct();
+        public IEnumerable<PlotCustomer> PlotCustomers => _storyLine.Select(p => p.StoryPlotCustomer);
         
-        public Dictionary<int, PlotCustomer> StoryLine => _customersStoryLine.ToDictionary();
+        public Dictionary<int, PlotCustomer> StoryLine => _storyLine.ToDictionary(p => (int)p.LevelNumber, p => p.StoryPlotCustomer);
     }
 }

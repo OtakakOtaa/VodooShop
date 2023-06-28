@@ -6,6 +6,7 @@ using CodeBase.Configuration.GameRemoteConfigurationLoader.TableParsers.Tables;
 using CodeBase.Customers.CustomersPool;
 using CodeBase.Customers.Data;
 using CodeBase.Infrastructure.Collections;
+using CodeBase.Levels.Data;
 using UnityEngine;
 
 namespace CodeBase.Configuration.GameRemoteConfigurationLoader
@@ -39,7 +40,7 @@ namespace CodeBase.Configuration.GameRemoteConfigurationLoader
         private IEnumerable<Customer> FindAllSimpleCustomers()
             => MapCustomers().Where(c => c is not PlotCustomer);
 
-        private SyncDictionary<int, PlotCustomer> FindAllStoryLines()
+        private IEnumerable<StoryLinePart> FindAllStoryLines()
         {
             Dictionary<IEnumerable<int>, PlotCustomer> plotCustomers = MapCustomers()
                 .OfType<PlotCustomer>()
@@ -48,8 +49,10 @@ namespace CodeBase.Configuration.GameRemoteConfigurationLoader
             Dictionary<int, PlotCustomer> storyLine = new();
             plotCustomers.ToList()
                 .ForEach(p => p.Key.ToList().ForEach(d => storyLine[d] = p.Value));
-            
-            return storyLine.OrderBy(p => p.Key).ToSyncDictionary(p => p.Key, p => p.Value);
+
+            return storyLine
+                .OrderBy(p => p.Key)
+                .Select(p => new StoryLinePart(p.Key, p.Value));
         }
 
         private IEnumerable<Customer> MapCustomers()

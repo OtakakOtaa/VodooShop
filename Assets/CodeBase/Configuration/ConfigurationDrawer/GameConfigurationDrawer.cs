@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using CodeBase.Configuration.Data;
 using UnityEditor;
@@ -11,36 +12,62 @@ namespace CodeBase.Configuration.ConfigurationDrawer
     public sealed class GameConfigurationDrawer : Editor
     {
         [SerializeField] private VisualTreeAsset _uxml;
-
+        
+        private VisualElement _frontRoot;
+        private GameConfiguration _gameConfiguration;
+        private bool _isElementsInited;
+        
         public override VisualElement CreateInspectorGUI()
         {
-            VisualElement root = new();
-            _uxml.CloneTree(root);
+            BindProperties();
 
-            var storyLineList = root.Q<ListView>("story-line-list");
-            if (storyLineList.makeItem is not null) return root;
-
-            var configuration = target as GameConfiguration;
+            if (_isElementsInited) return _frontRoot;
             
-            storyLineList.itemsSource = configuration.StoryLine.ToArray();
-            storyLineList.makeItem = () => new PropertyField();
-            storyLineList.bindItem = (e, i) =>
+            InitStoryLineList();
+
+            _isElementsInited = true;
+            return _frontRoot;
+        }
+
+        private void BindProperties()
+        {
+            _frontRoot = new VisualElement();
+            _uxml.CloneTree(_frontRoot);
+            _gameConfiguration = target as GameConfiguration;
+        }
+        
+        private void InitStoryLineList()
+        {
+            var customerStoryLineList = _frontRoot.Q<ListView>("story-customers-list");
+
+            customerStoryLineList.itemsSource = _gameConfiguration.StoryLine.ToArray();
+            customerStoryLineList.makeItem = () => new CustomerTableVisualItem();
+            customerStoryLineList.bindItem = (e, i) =>
             {
-                var item = e as PropertyField;
-                var itemPath = $"_customersStoryLine._items.Array.data[{i}]";
-                item.bindingPath = itemPath;
+                var item = e as CustomerTableVisualItem;
+                var storyPartPath = $"_storyLine.Array.data[{i}]"; 
+                var customerPath = $"{storyPartPath}._storyPlotCustomer";
+                var customerNamePath = $"{customerPath}._name";
+                var customerLevelPath = $"{storyPartPath}._levelNumber";
+                
+                item.ItemTagField.text = serializedObject.FindProperty(customerLevelPath).intValue.ToString();
+                item.CustomerValueField.label = serializedObject.FindProperty(customerNamePath).stringValue;
+                item.CustomerValueField.bindingPath = customerPath;
                 item.Bind(serializedObject);
             };
-
-            storyLineList.selectionType = SelectionType.Multiple;
-            
-            storyLineList.fixedItemHeight = 16;
-            storyLineList.style.flexGrow = 1.0f;
-            storyLineList.style.fontSize = 20;
-
-            Debug.Log("Ok");
-            return root;
+            customerStoryLineList.selectionType = SelectionType.Multiple;
         }
     }
 
+
+    public static class CustomEditorExtensions
+    {
+        public static TValue GetRefValue<TValue>(this SerializedProperty target)
+        {
+            var rootObject = target.serializedObject.targetObject;
+            var property = rootObject.GetType().GetProperty(target.propertyPath) ?? throw new Exception();
+            
+            return (TValue)property.GetValue(rootObject);
+        }
+    }
 }

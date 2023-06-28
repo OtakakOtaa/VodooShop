@@ -1,4 +1,4 @@
 {
 	"name": "Configuration",
-	"references":[ "GUID:3cb19152261c6b344bce0570bab89310", "GUID:f51ebe6a0ceec4240a699833d6309b23", "GUID:de281793c3e435e40b85690b53d4c665", "GUID:b71f346cdda84b04cad788d11443bcd9" ]
+	"references":[ "GUID:3cb19152261c6b344bce0570bab89310", "GUID:f51ebe6a0ceec4240a699833d6309b23", "GUID:de281793c3e435e40b85690b53d4c665", "GUID:b71f346cdda84b04cad788d11443bcd9", "GUID:51dfa9b3d757efd43adf268753b2f564" ]
 }
