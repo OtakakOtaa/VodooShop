@@ -1,8 +1,8 @@
 {
     "name": "Configuration.Drawer.Editor",
     "rootNamespace": "",
-    "references": [
-        "GUID:343deaaf83e0cee4ca978e7df0b80d21",
+    "references": 
+    [
         "GUID:40e8b7de7c888144a8b4ab0df24f8725",
         "GUID:b71f346cdda84b04cad788d11443bcd9"
     ],

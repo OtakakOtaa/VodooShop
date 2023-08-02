@@ -1,8 +1,8 @@
 using System;
 using CodeBase.GlobalRule.Base.GlobalStateMachine.GameStates.StatesFactory;
-using CodeBase.Infrastructure.Collections;
-using CodeBase.Infrastructure.FSM;
-using CodeBase.Infrastructure.FSM.States;
+using CodeBase.Infrastructure.Runtime.Collections;
+using CodeBase.Infrastructure.Runtime.FSM;
+using CodeBase.Infrastructure.Runtime.FSM.States;
 
 namespace CodeBase.GlobalRule.Base.GlobalStateMachine.StateMachine
 {

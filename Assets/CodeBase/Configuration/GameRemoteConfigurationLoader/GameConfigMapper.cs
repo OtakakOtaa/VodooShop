@@ -1,12 +1,12 @@
 #nullable enable
 using System.Collections.Generic;
 using System.Linq;
-using CodeBase.Configuration.Data;
+using CodeBase.Configuration.Data.MainConfig;
 using CodeBase.Configuration.GameRemoteConfigurationLoader.TableParsers.Tables;
+using CodeBase.Customers;
 using CodeBase.Customers.CustomersPool;
 using CodeBase.Customers.Data;
-using CodeBase.Infrastructure.Collections;
-using CodeBase.Levels.Data;
+using CodeBase.Customers.Order;
 using UnityEngine;
 
 namespace CodeBase.Configuration.GameRemoteConfigurationLoader
@@ -21,77 +21,83 @@ namespace CodeBase.Configuration.GameRemoteConfigurationLoader
         public GameConfiguration TranslateToConfigFormat()
         {
             var configuration = ScriptableObject.CreateInstance<GameConfiguration>();
-
-            configuration.Constructor(
+            configuration.Constructor
+            (
                 CastWithoutNullState(_container.General.DaysAmount),
                 CastWithoutNullState(_container.General.DayDuration),
-                MapPools(),
-                FindAllSimpleCustomers(),
-                FindAllStoryLines(),
-                FindOrdersWithoutOwner());
+                AllStoryLines(),
+                CustomersPools(),
+                AllSimpleCustomers(),
+                AllOrdersWithoutOwner()
+            );
+
 
             return configuration;
         }
 
-        private IEnumerable<CustomersPool> MapPools()
+
+        private IEnumerable<CustomersPool> CustomersPools()
             => _container.Pools.Select(p =>
                 new CustomersPool(CastWithoutNullState(p.LevelRange), p.CustomersId));
 
-        private IEnumerable<Customer> FindAllSimpleCustomers()
-            => MapCustomers().Where(c => c is not PlotCustomer);
+        private IEnumerable<Customer> AllSimpleCustomers()
+            => PlotCustomerMap()
+                .Where(c => c.Value is false)
+                .Select(c => c.Key);
 
-        private IEnumerable<StoryLinePart> FindAllStoryLines()
-        {
-            Dictionary<IEnumerable<int>, PlotCustomer> plotCustomers = MapCustomers()
-                .OfType<PlotCustomer>()
-                .ToDictionary(c => GetDaysNumbersByPlotId(c.Id), c => c);
+        private IEnumerable<StoryLinePart> AllStoryLines()
+            => _container.Days
+                .Select(d => new StoryLinePart
+                (
+                    CastWithoutNullState(d.LevelId),
+                    AllStoryOrders().First(o => o.Holder.Id == d.StoryCustomersId.First())
+                ));
 
-            Dictionary<int, PlotCustomer> storyLine = new();
-            plotCustomers.ToList()
-                .ForEach(p => p.Key.ToList().ForEach(d => storyLine[d] = p.Value));
-
-            return storyLine
-                .OrderBy(p => p.Key)
-                .Select(p => new StoryLinePart(p.Key, p.Value));
-        }
-
-        private IEnumerable<Customer> MapCustomers()
-            => _container.Customers
-                .Select(c =>
-                {
-                    var ownedOrders = FindOrdersByCustomerId(c.Id!).ToArray();
-                    var isPlot = ownedOrders.Length > 0;
-                    return isPlot is false ? new Customer(c.Id, c.Name) : new PlotCustomer(c.Id, c.Name, ownedOrders);
-                });
-
-        private IEnumerable<CustomerOrder> FindOrdersWithoutOwner()
+        private IEnumerable<CustomerOrderWithoutOwner> AllOrdersWithoutOwner()
             => _container.Orders
                 .Where(o => o.CustomerId is null)
-                .Select(o => new CustomerOrder(CastWithoutNullState(o.Reward),
+                .Select(o => new CustomerOrderWithoutOwner
+                (
+                    CastWithoutNullState(o.Reward),
                     o.RequestedItem,
-                    FindDialogueById(o.DialogueId!)));
+                    FindDialogueById(o.DialogueId!)
+                ));
 
-        private IEnumerable<CustomerOrder> FindOrdersByCustomerId(string id)
+        private IEnumerable<StoryCustomerOrder> AllStoryOrders()
             => _container.Orders
-                .Where(o => o.CustomerId == id)
-                .OrderBy(o => o.Chapter)
-                .Select(o => new CustomerOrder(CastWithoutNullState(o.Reward),
+                .Where(o => o.CustomerId is not null)
+                .Select(o => new StoryCustomerOrder
+                (
+                    FindCustomerById(o.CustomerId!),
+                    CastWithoutNullState(o.Reward),
                     o.RequestedItem,
-                    FindDialogueById(o.DialogueId!)));
+                    FindDialogueById(o.DialogueId!)
+                ))
+                .ToArray();
+
+        private Customer FindCustomerById(string id)
+            => _container.Customers
+                .Where(c => c.Id == id)
+                .Select(c => new Customer(c.Id, c.Name))
+                .First();
 
         private Dialogue FindDialogueById(string id)
             => _container.Dialogues
                 .Where(d => d.Id == id)
                 .Select(d => new Dialogue(d.Speak, d.PromptSpeak))
                 .First();
-
-        private IEnumerable<int> GetDaysNumbersByPlotId(string id)
-            => _container.Days
-                .Where(d => d.StoryCustomersId.Contains(id))
-                .Select(d => CastWithoutNullState(d.LevelId));
+        
+        private Dictionary<Customer, bool> PlotCustomerMap()
+            => _container.Customers
+                .ToDictionary
+                (
+                    c => new Customer(c.Id, c.Name),
+                    c => AllStoryOrders().FirstOrDefault(o => o.Holder.Id == c.Id) != default
+                );
 
         private T CastWithoutNullState<T>(T? target) where T : struct
-            => (T)target;
+            => (T)target!;
+
 
         public sealed class MapperDataContainer
         {
@@ -102,5 +108,6 @@ namespace CodeBase.Configuration.GameRemoteConfigurationLoader
             public CustomerPoolsParser.Pool[] Pools = null!;
             public DialogueParser.Dialogue[] Dialogues = null!;
         }
+
     }
 }

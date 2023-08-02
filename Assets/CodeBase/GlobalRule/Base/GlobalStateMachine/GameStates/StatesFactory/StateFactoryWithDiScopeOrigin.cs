@@ -1,7 +1,7 @@
 using System;
-using CodeBase.Infrastructure.Collections;
-using CodeBase.Infrastructure.Di;
-using CodeBase.Infrastructure.FSM.States;
+using CodeBase.Infrastructure.Runtime.Collections;
+using CodeBase.Infrastructure.Runtime.Di;
+using CodeBase.Infrastructure.Runtime.FSM.States;
 
 namespace CodeBase.GlobalRule.Base.GlobalStateMachine.GameStates.StatesFactory
 {
@@ -26,7 +26,7 @@ namespace CodeBase.GlobalRule.Base.GlobalStateMachine.GameStates.StatesFactory
             where TStateWithPayload : class, IStateWithPayload<TPayload>
         {
             CheckCreationStateType<IStateWithPayload<TPayload>>();
-            return _scopeProvider.GetScope().CreateInstanceFromContainer<IStateWithPayload<TPayload>>();
+            return _scopeProvider.GetScope().CreateInstanceFromContainer<TStateWithPayload>();
         }
 
         private void CheckCreationStateType<TState>() where TState : IState

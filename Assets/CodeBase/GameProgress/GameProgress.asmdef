@@ -1,4 +1,9 @@
 {
-	"name": "GameProgress",
-	"references":[ "GUID:3cb19152261c6b344bce0570bab89310", "GUID:b71f346cdda84b04cad788d11443bcd9" ]
+  "name": "GameProgress",
+  "references": 
+  [
+    "GUID:40e8b7de7c888144a8b4ab0df24f8725",
+    "GUID:b71f346cdda84b04cad788d11443bcd9",
+    "GUID:de281793c3e435e40b85690b53d4c665"
+  ]
 }

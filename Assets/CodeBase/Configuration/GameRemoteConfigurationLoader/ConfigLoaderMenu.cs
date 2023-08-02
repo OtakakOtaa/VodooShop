@@ -1,6 +1,6 @@
-using CodeBase.Configuration.Data;
+using System.Linq;
+using CodeBase.Configuration.Data.MainConfig;
 using UnityEditor;
-using UnityEngine;
 
 namespace CodeBase.Configuration.GameRemoteConfigurationLoader
 {
@@ -18,25 +18,17 @@ namespace CodeBase.Configuration.GameRemoteConfigurationLoader
             StartFetching();
             async void StartFetching()
             {
-                GameConfiguration config = await new GameConfigOriginLoader().FetchConfig();
-                AssetDatabase.DeleteAsset(GameConfigProvider.MainConfigurationPatch);
-                AssetDatabase.CreateAsset(config, GameConfigProvider.MainConfigurationPatch); 
+                var config = await new GameConfigOriginLoader().FetchConfig();
+
+                var configPath = $"Assets/Resources/{GameConfigResolver.MainConfigurationPatch}.asset";
+                var hasConfiguration = AssetDatabase.FindAssets(GameConfigResolver.MainConfigurationPatch).FirstOrDefault() is not null;
+                if(hasConfiguration)
+                    AssetDatabase.DeleteAsset(configPath);
+                AssetDatabase.CreateAsset(config, configPath);
                 
-                Rect popupSettings = new (Screen.width / 2, Screen.height / 2, 4, 2);
-                const string successMessage = "Config fetched and saved in assets"; 
-                PopupWindow.Show(popupSettings, new OperationResultPopup(successMessage));
+                const string successMessage = "Config fetched and saved in assets";
+                EditorUtility.DisplayDialog(nameof(FetchGameConfiguration), successMessage, "OK");
             }
-        }
-
-        private class OperationResultPopup : PopupWindowContent
-        {
-            private readonly string _notificationMassage;
-
-            public OperationResultPopup(string notificationMassage)
-                => _notificationMassage = notificationMassage;
-
-            public override void OnGUI(Rect rect)
-                => GUILayout.Label(_notificationMassage);
         }
     }
 }

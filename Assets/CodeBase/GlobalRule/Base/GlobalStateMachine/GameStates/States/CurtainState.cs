@@ -1,7 +1,9 @@
 using System;
 using CodeBase.GlobalRule.Base.GlobalStateMachine.StateMachine;
 using CodeBase.Infrastructure;
-using CodeBase.Infrastructure.FSM.States;
+using CodeBase.Infrastructure.Runtime;
+using CodeBase.Infrastructure.Runtime.Contracts;
+using CodeBase.Infrastructure.Runtime.FSM.States;
 using Cysharp.Threading.Tasks;
 
 namespace CodeBase.GlobalRule.Base.GlobalStateMachine.GameStates.States

@@ -1,8 +1,8 @@
 using CodeBase.GlobalRule.Base.GlobalStateMachine.GameStates.States;
 using CodeBase.GlobalRule.Base.GlobalStateMachine.GameStates.StatesFactory;
 using CodeBase.GlobalRule.Base.GlobalStateMachine.StateMachine;
-using CodeBase.Infrastructure.Collections;
-using CodeBase.Infrastructure.Di;
+using CodeBase.Infrastructure.Runtime.Collections;
+using CodeBase.Infrastructure.Runtime.Di;
 using VContainer;
 
 namespace CodeBase.GlobalRule.ScopeConfigurator

@@ -1,0 +1,30 @@
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="project://database/Assets/Visual/UI/MainMenuStyleTable.uss?fileID=7433441132597879392&amp;guid=707dc219553b58942a4df62cd4ba0f59&amp;type=3#MainMenuStyleTable" />
+    <ui:VisualElement name="root" style="width: auto; height: auto; background-color: rgb(255, 255, 255); align-items: stretch; justify-content: space-between; flex-grow: 1; flex-shrink: 1;">
+        <ui:VisualElement name="top-frame" class="frame" />
+        <ui:GroupBox name="main-box" style="height: 76%; flex-direction: column; align-items: stretch; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; background-color: rgb(255, 255, 255); width: auto;">
+            <ui:VisualElement name="top-panel" style="height: 15%; flex-direction: row; align-items: center; justify-content: space-around; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0;">
+                <ui:VisualElement name="lvl" class="elementScale" style="width: 107px; height: 42px; background-image: url(&apos;project://database/Assets/EntityAssets/UI/MainMenu/lvl%20tab.png?fileID=21300000&amp;guid=f5f36ca00b1d6c84391e7e9499a3b0c6&amp;type=3#lvl tab&apos;);" />
+                <ui:VisualElement name="coins" class="elementScale" style="width: 143px; height: 42px; background-image: url(&apos;project://database/Assets/EntityAssets/UI/MainMenu/coins%20tab.png?fileID=21300000&amp;guid=68fa01c7bce54f14bae36d89ac776c95&amp;type=3#coins tab&apos;);" />
+                <ui:VisualElement name="candys" class="elementScale" style="background-image: url(&apos;project://database/Assets/EntityAssets/UI/MainMenu/candy%20tab.png?fileID=21300000&amp;guid=05341095aca46fa4c8c70509782b4855&amp;type=3#candy tab&apos;); width: 143px; height: 42px;" />
+            </ui:VisualElement>
+            <ui:VisualElement name="main-panel" style="height: 85%; flex-direction: row; justify-content: space-between; align-items: center;">
+                <ui:VisualElement name="left" style="width: 15%; justify-content: flex-start; align-items: flex-start;">
+                    <ui:Button display-tooltip-when-elided="true" class="extremeButtons" style="background-image: url(&apos;project://database/Assets/EntityAssets/UI/MainMenu/achievements%20button.png?fileID=21300000&amp;guid=0f1ad3f84938f1a4c8be1ea736aa4784&amp;type=3#achievements button&apos;);" />
+                    <ui:Button display-tooltip-when-elided="true" class="extremeButtons" style="background-image: url(&apos;project://database/Assets/EntityAssets/UI/MainMenu/customers%20button.png?fileID=21300000&amp;guid=800ac7186bd8ea84492b6692c534723f&amp;type=3#customers button&apos;);" />
+                    <ui:Button display-tooltip-when-elided="true" class="extremeButtons" style="background-image: url(&apos;project://database/Assets/EntityAssets/UI/MainMenu/settings%20button.png?fileID=21300000&amp;guid=fb4cbb17e8aa5f54285da134af8790e9&amp;type=3#settings button&apos;);" />
+                </ui:VisualElement>
+                <ui:VisualElement name="center" style="width: 70%; align-items: center; justify-content: flex-start; height: 100%;">
+                    <ui:VisualElement name="logo" style="background-image: url(&apos;project://database/Assets/EntityAssets/UI/MainMenu/name.png?fileID=21300000&amp;guid=bc6327d742f67dd4dbcdb7dde274749a&amp;type=3#name&apos;); width: 1036px; height: 620px; margin-bottom: 0; padding-bottom: 0; top: auto; bottom: auto; scale: 0.8 0.8; margin-top: 10%; position: relative; align-items: center; left: auto; right: auto;" />
+                    <ui:Button display-tooltip-when-elided="true" name="start-button" style="background-color: rgb(255, 255, 255); margin-left: 0; margin-right: 0; margin-top: 40%; margin-bottom: 0; padding-left: 0; padding-right: 0; padding-top: 0; padding-bottom: 0; border-left-width: 0; border-right-width: 0; border-top-width: 0; border-bottom-width: 0; border-top-left-radius: 0; border-bottom-left-radius: 0; border-top-right-radius: 0; border-bottom-right-radius: 0; background-image: url(&apos;project://database/Assets/EntityAssets/UI/MainMenu/play%20button.png?fileID=21300000&amp;guid=c1dc0c6e65f8c5042b381a7e976932fe&amp;type=3#play button&apos;); width: 552px; height: 162px; scale: 1.3 1.3;" />
+                </ui:VisualElement>
+                <ui:VisualElement name="right" style="width: 15%; align-items: auto;">
+                    <ui:Button display-tooltip-when-elided="true" class="extremeButtons" style="background-image: url(&apos;project://database/Assets/EntityAssets/UI/MainMenu/shop%20button.png?fileID=21300000&amp;guid=8fa1374b34d35d940b1f6c1ca45bb5ae&amp;type=3#shop button&apos;);" />
+                    <ui:Button display-tooltip-when-elided="true" name="Button" class="extremeButtons" style="background-image: url(&apos;project://database/Assets/EntityAssets/UI/MainMenu/candy%20shop%20button.png?fileID=21300000&amp;guid=3270d752fffa75142afb5d3fcb7c2be0&amp;type=3#candy shop button&apos;);" />
+                    <ui:Button display-tooltip-when-elided="true" class="extremeButtons" style="background-image: url(&apos;project://database/Assets/EntityAssets/UI/MainMenu/stats%20button.png?fileID=21300000&amp;guid=8f5b5011e93703546b3d71182f3475b7&amp;type=3#stats button&apos;);" />
+                </ui:VisualElement>
+            </ui:VisualElement>
+        </ui:GroupBox>
+        <ui:VisualElement name="bottom-frame" class="frame" />
+    </ui:VisualElement>
+</ui:UXML>

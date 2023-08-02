@@ -10,7 +10,7 @@ namespace CodeBase.Test
         [UnityTest] public IEnumerator BootstrapConfigLoader()
         {
             GameConfigOriginLoader gameConfigOriginLoader = new();
-            yield return UniTask.WhenAll(gameConfigOriginLoader.FetchConfig()).ToCoroutine();
+            yield return gameConfigOriginLoader.FetchConfig().ToCoroutine();
         }
     }
 }

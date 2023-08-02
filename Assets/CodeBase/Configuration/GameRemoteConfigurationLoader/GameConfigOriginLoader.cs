@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using CodeBase.Configuration.Data;
+using CodeBase.Configuration.Data.MainConfig;
 using CodeBase.Configuration.GameRemoteConfigurationLoader.TableParsers;
 using Cysharp.Threading.Tasks;
 using UnityEngine.Networking;

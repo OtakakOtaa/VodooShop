@@ -1,7 +1,6 @@
-using CodeBase.GlobalRule.Base.UIRule;
-using CodeBase.Infrastructure.Di;
+using CodeBase.GlobalRule.Base.UIRule.MainMenuRule;
+using CodeBase.Infrastructure.Runtime.Di;
 using VContainer;
-using VContainer.Unity;
 
 namespace CodeBase.GlobalRule.ScopeConfigurator
 {
@@ -17,6 +16,7 @@ namespace CodeBase.GlobalRule.ScopeConfigurator
         public override void Configure(IContainerBuilder builder)
         {
             builder.RegisterInstance(_menuUIMediator);
+            builder.Register<MainMenuUIBinder>(Lifetime.Singleton);
         }
     }
 }

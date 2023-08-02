@@ -1,4 +1,4 @@
-using CodeBase.Infrastructure.FSM.States;
+using CodeBase.Infrastructure.Runtime.FSM.States;
 
 namespace CodeBase.GlobalRule.Base.GlobalStateMachine.StateMachine
 {

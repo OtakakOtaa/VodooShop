@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using CodeBase.Configuration.Data;
+using CodeBase.Configuration.Data.MainConfig;
 using CodeBase.Configuration.GameRemoteConfigurationLoader.TableParsers.Tables;
 
 namespace CodeBase.Configuration.GameRemoteConfigurationLoader.TableParsers

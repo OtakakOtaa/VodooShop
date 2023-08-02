@@ -1,4 +1,4 @@
-using CodeBase.GlobalRule.Base.UIRule;
+using CodeBase.GlobalRule.Base.UIRule.MainMenuRule;
 using CodeBase.GlobalRule.ScopeConfigurator;
 using UnityEngine;
 using VContainer;
